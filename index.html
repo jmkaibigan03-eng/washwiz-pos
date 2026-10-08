@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>WashWiz</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<noscript><p class="noscript">WashWiz needs JavaScript. Please turn it on in your browser.</p></noscript>
+
+<!-- Icons: one outline style, defined once here and reused with <use href="#i-name"> -->
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></symbol>
+  <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></symbol>
+  <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol>
+  <symbol id="i-alert-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></symbol>
+  <symbol id="i-store" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></symbol>
+  <symbol id="i-log-out" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-note" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></symbol>
+</svg>
+
+<!-- Shown for a moment while the page asks PHP "is someone already logged in?" -->
+<div id="boot" class="boot" role="status">
+  <div class="boot__inner">
+    <span class="brand-mark brand-mark--lg"><svg class="icon"><use href="#i-droplet"/></svg></span>
+    <span class="spinner" id="boot-spinner"></span>
+    <p id="boot-text">Loading WashWiz</p>
+    <button type="button" class="btn btn-secondary" id="boot-retry" hidden>Try again</button>
+  </div>
+</div>
+
+<!-- LOGIN screen (also used for the first-time "create the admin password" step) -->
+<div id="auth" class="auth" hidden>
+  <div class="auth__card">
+    <div class="auth__brand"><span class="brand-mark"><svg class="icon"><use href="#i-droplet"/></svg></span><span class="brand-name">WashWiz</span></div>
+    <h1 id="auth-title">Log in</h1>
+    <p id="auth-sub" class="auth__sub"></p>
+    <div id="auth-error" class="alert alert--danger" role="alert" hidden><svg class="icon"><use href="#i-alert-circle"/></svg><span id="auth-error-text"></span></div>
+    <div id="auth-notice" class="alert alert--info" role="status" hidden><svg class="icon"><use href="#i-info"/></svg><span id="auth-notice-text"></span></div>
+
+    <form id="login-form" novalidate>
+      <div class="field">
+        <label for="login-username">Username</label>
+        <input id="login-username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <div class="input-group">
+          <input id="login-password" type="password" autocomplete="current-password">
+          <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button>
+        </div>
+      </div>
+      <button type="submit" id="login-submit" class="btn btn-primary btn-lg btn-block">Log in</button>
+    </form>
+
+    <form id="setup-form" novalidate hidden>
+      <div class="field">
+        <label for="setup-password">New password</label>
+        <div class="input-group">
+          <input id="setup-password" type="password" autocomplete="new-password">
+          <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button>
+        </div>
+        <p class="field__hint">Use at least 6 characters.</p>
+      </div>
+      <div class="field">
+        <label for="setup-confirm">Confirm password</label>
+        <div class="input-group">
+          <input id="setup-confirm" type="password" autocomplete="new-password">
+          <button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button>
+        </div>
+      </div>
+      <button type="submit" id="setup-submit" class="btn btn-primary btn-lg btn-block">Create password</button>
+    </form>
+  </div>
+  <p class="auth__foot">Laundry order tracking</p>
+</div>
+
+<!-- THE APP (shown only after PHP says we are logged in) -->
+<div id="app" class="app" hidden>
+  <div class="busybar" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <button type="button" id="menu-btn" class="icon-btn" data-act="open-menu" aria-label="Open menu" aria-controls="sidebar" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <a class="brand" href="#dashboard"><span class="brand-mark"><svg class="icon"><use href="#i-droplet"/></svg></span><span class="brand-text">WashWiz</span></a>
+    <button type="button" class="btn btn-primary btn-sm" data-act="new-order"><svg class="icon"><use href="#i-plus"/></svg>New order</button>
+  </header>
+  <div id="scrim" class="scrim" data-act="close-menu"></div>
+
+  <aside id="sidebar" class="sidebar" aria-label="Sidebar">
+    <a class="brand" href="#dashboard"><span class="brand-mark"><svg class="icon"><use href="#i-droplet"/></svg></span><span class="brand-text">WashWiz</span></a>
+    <nav class="nav" aria-label="Main">
+      <a class="nav__link" href="#dashboard" data-view="dashboard"><svg class="icon"><use href="#i-grid"/></svg>Dashboard</a>
+      <a class="nav__link" href="#orders" data-view="orders"><svg class="icon"><use href="#i-clipboard"/></svg>Orders</a>
+      <a class="nav__link" href="#customers" data-view="customers"><svg class="icon"><use href="#i-users"/></svg>Customers</a>
+      <a class="nav__link" href="#services" data-view="services"><svg class="icon"><use href="#i-tag"/></svg>Services</a>
+    </nav>
+    <div class="sidebar__user">
+      <div class="user">
+        <span class="avatar" id="user-avatar" aria-hidden="true">?</span>
+        <div class="user__text"><strong id="user-name">Signed in</strong><span id="user-role"></span></div>
+      </div>
+      <button type="button" class="btn btn-ghost btn-sm" data-act="change-password" data-admin><svg class="icon"><use href="#i-key"/></svg>Change password</button>
+      <button type="button" class="btn btn-ghost btn-sm" data-act="logout"><svg class="icon"><use href="#i-log-out"/></svg>Log out</button>
+    </div>
+  </aside>
+
+  <main id="main" class="main">
+    <section id="view-dashboard" class="view" aria-labelledby="h-dashboard">
+      <header class="page-head">
+        <div><h1 id="h-dashboard" tabindex="-1">Dashboard</h1><p class="page-head__sub" id="dash-sub"></p></div>
+        <div class="page-head__actions only-desktop"><button type="button" class="btn btn-primary" data-act="new-order"><svg class="icon"><use href="#i-plus"/></svg>New order</button></div>
+      </header>
+      <div id="dash-body"></div>
+    </section>
+
+    <section id="view-orders" class="view" aria-labelledby="h-orders" hidden>
+      <header class="page-head">
+        <div><h1 id="h-orders" tabindex="-1">Orders</h1><p class="page-head__sub">Follow each order from drop-off to pick-up.</p></div>
+        <div class="page-head__actions only-desktop"><button type="button" class="btn btn-primary" data-act="new-order"><svg class="icon"><use href="#i-plus"/></svg>New order</button></div>
+      </header>
+      <div class="toolbar">
+        <div class="search"><svg class="icon"><use href="#i-search"/></svg><input id="order-search" type="search" placeholder="Order no., name or phone" aria-label="Search orders"></div>
+        <select id="filter-fulfillment" aria-label="Filter by fulfillment"><option value="">All fulfillment</option><option>Store Dropoff</option><option>Home Delivery</option></select>
+        <select id="filter-payment" aria-label="Filter by payment"><option value="">Paid and unpaid</option><option value="unpaid">Unpaid only</option><option value="paid">Paid only</option></select>
+      </div>
+      <div id="stage-tabs" class="stage-tabs" role="group" aria-label="Order stage"></div>
+      <div id="board" class="board"></div>
+    </section>
+
+    <section id="view-customers" class="view" aria-labelledby="h-customers" hidden>
+      <header class="page-head">
+        <div><h1 id="h-customers" tabindex="-1">Customers</h1><p class="page-head__sub">Customers are added automatically when you save an order.</p></div>
+      </header>
+      <div class="toolbar"><div class="search"><svg class="icon"><use href="#i-search"/></svg><input id="customer-search" type="search" placeholder="Name or phone" aria-label="Search customers"></div></div>
+      <div id="customers-body"></div>
+    </section>
+
+    <section id="view-services" class="view" aria-labelledby="h-services" hidden>
+      <header class="page-head">
+        <div><h1 id="h-services" tabindex="-1">Services</h1><p class="page-head__sub">Prices used when an order is saved.</p></div>
+        <div class="page-head__actions"><button type="button" id="btn-add-service" class="btn btn-primary" data-act="add-service" data-admin><svg class="icon"><use href="#i-plus"/></svg>Add service</button></div>
+      </header>
+      <div id="services-body"></div>
+    </section>
+  </main>
+</div>
+
+<!-- MODAL: new order -->
+<div class="modal" id="order-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="order-modal-title">
+    <header class="modal__head"><h2 id="order-modal-title">New order</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></header>
+    <form id="order-form" class="modal__form" novalidate>
+      <div class="modal__body">
+        <section class="form-section" aria-labelledby="fs-customer">
+          <h3 id="fs-customer">Customer</h3>
+          <div class="field">
+            <label for="of-name">Customer name</label>
+            <input id="of-name" type="text" list="customer-list" autocomplete="off" placeholder="For example, Maria Santos" data-autofocus>
+            <datalist id="customer-list"></datalist>
+          </div>
+          <div class="field">
+            <label for="of-phone">Phone number</label>
+            <input id="of-phone" type="tel" inputmode="tel" autocomplete="off" placeholder="For example, 0917 123 4567">
+          </div>
+        </section>
+        <section class="form-section" aria-labelledby="fs-order">
+          <h3 id="fs-order">Order</h3>
+          <div class="form-row">
+            <div class="field"><label for="of-service">Service</label><select id="of-service"></select></div>
+            <div class="field"><label for="of-qty" id="of-qty-label">Weight (kg)</label><input id="of-qty" type="number" min="0.5" step="0.5" value="5" inputmode="decimal"></div>
+          </div>
+          <div class="field">
+            <span class="field__label" id="of-ful-label">Fulfillment</span>
+            <div class="segmented" role="radiogroup" aria-labelledby="of-ful-label">
+              <label class="segmented__opt"><input type="radio" name="fulfillment" value="Store Dropoff" checked><span><svg class="icon"><use href="#i-store"/></svg>Store Dropoff</span></label>
+              <label class="segmented__opt"><input type="radio" name="fulfillment" value="Home Delivery"><span><svg class="icon"><use href="#i-truck"/></svg>Home Delivery</span></label>
+            </div>
+          </div>
+          <div class="field" id="of-address-field" hidden>
+            <label for="of-address">Delivery address</label>
+            <input id="of-address" type="text" autocomplete="off" placeholder="Street, barangay, city">
+          </div>
+          <div class="field"><label for="of-due">Due date <span class="optional">(optional)</span></label><input id="of-due" type="date"></div>
+          <div class="field"><label for="of-notes">Notes <span class="optional">(optional)</span></label><textarea id="of-notes" rows="2" placeholder="Stains, delicate items, detergent preference"></textarea></div>
+        </section>
+        <section class="form-section" aria-labelledby="fs-payment">
+          <h3 id="fs-payment">Payment</h3>
+          <label class="check"><input type="checkbox" id="of-paid"><span>The customer has already paid</span></label>
+        </section>
+        <dl class="summary" aria-label="Order summary">
+          <div><dt>Subtotal</dt><dd id="sum-sub">₱0.00</dd></div>
+          <div><dt>Delivery fee</dt><dd id="sum-fee">₱0.00</dd></div>
+          <div class="summary__total"><dt>Total</dt><dd id="sum-total">₱0.00</dd></div>
+        </dl>
+      </div>
+      <footer class="modal__foot"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" id="order-submit" class="btn btn-primary">Save order</button></footer>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: add or edit a service -->
+<div class="modal" id="service-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+    <header class="modal__head"><h2 id="service-modal-title">Add service</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></header>
+    <form id="service-form" class="modal__form" novalidate>
+      <div class="modal__body">
+        <div class="field"><label for="sv-name">Service name</label><input id="sv-name" type="text" placeholder="For example, Comforter wash" data-autofocus></div>
+        <div class="form-row">
+          <div class="field"><label for="sv-price">Price (₱)</label><input id="sv-price" type="number" min="0" step="0.01" inputmode="decimal"></div>
+          <div class="field"><label for="sv-unit">Charged per</label><select id="sv-unit"><option value="kg">kg</option><option value="piece">piece</option></select></div>
+        </div>
+      </div>
+      <footer class="modal__foot"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" id="service-submit" class="btn btn-primary">Save service</button></footer>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: change the admin password -->
+<div class="modal" id="password-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="password-modal-title">
+    <header class="modal__head"><h2 id="password-modal-title">Change password</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></header>
+    <form id="password-form" class="modal__form" novalidate>
+      <div class="modal__body">
+        <div class="field">
+          <label for="pw-new">New password</label>
+          <div class="input-group"><input id="pw-new" type="password" autocomplete="new-password" data-autofocus><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button></div>
+          <p class="field__hint">Use at least 6 characters.</p>
+        </div>
+        <div class="field">
+          <label for="pw-confirm">Confirm new password</label>
+          <div class="input-group"><input id="pw-confirm" type="password" autocomplete="new-password"><button type="button" class="pw-toggle" aria-label="Show password" aria-pressed="false"><svg class="icon"><use href="#i-eye"/></svg></button></div>
+        </div>
+      </div>
+      <footer class="modal__foot"><button type="button" class="btn btn-secondary" data-close>Cancel</button><button type="submit" id="password-submit" class="btn btn-primary">Save password</button></footer>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: confirm a delete (one dialog reused for every delete) -->
+<div class="modal" id="confirm-modal" aria-hidden="true">
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__panel modal__panel--sm" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+    <header class="modal__head"><h2 id="confirm-title">Are you sure?</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></header>
+    <div class="modal__body"><p id="confirm-message"></p></div>
+    <footer class="modal__foot"><button type="button" class="btn btn-secondary" data-close data-autofocus>Cancel</button><button type="button" id="confirm-ok" class="btn btn-danger">Delete</button></footer>
+  </div>
+</div>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
